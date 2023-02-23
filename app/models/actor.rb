@@ -5,19 +5,28 @@ class Actor < ActiveRecord::Base
           t.timestamps
         end
     
-        create_table :Actor do |t|
+        create_table :Actors do |t|
           t.belongs_to :actor
           t.datetime :publisher
           t.timestamps
-          t.belongs_to :actor, foreign_key: true
-        end
+         end
       end
     end
     class Series < ApplicationRecord
-        has_one :acts
+        has_one :acting 
+        has_one :acting_history, through: :acting
       end
 
+      create_table :Actor do |t|
+        t.belongs_to :actor, index: { unique: true }, foreign_key: true
+        # ...
+      end
 
+      class Account < ApplicationRecord
+        belongs_to :actor
+        has_one :acting_history
+      end
+      
 
 
 end
