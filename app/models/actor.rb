@@ -1,32 +1,32 @@
 class Actor < ActiveRecord::Base
     def change
         create_table :Actor do |t|
-          t.string :name
-          t.timestamps
+          t.string :full_name
+          t.string :last_name
         end
-    
-        create_table :Actors do |t|
-          t.belongs_to :actor
-          t.datetime :publisher
-          t.timestamps
-         end
-      end
-    end
-    class Series < ApplicationRecord
-        has_one :acting 
-        has_one :acting_history, through: :acting
-      end
-
-      create_table :Actor do |t|
-        t.belongs_to :actor, index: { unique: true }, foreign_key: true
-        # ...
-      end
-
-      class Account < ApplicationRecord
-        belongs_to :actor
-        has_one :acting_history
-      end
       
+ class full_name < ActiveRecord::Base
+    def create_table 
+     t.belongs_to :full_name
+
+    end  
+end
+
+class first_name < ApplicationRecord
+  has_one :full_name
+  has_one :full_name, through: :full_name
+end
 
 
+class full_name < ActiveRecord::Base
+  def create_table 
+   t.belongs_to :last_name
+
+  end  
+end
+
+class last_name < ApplicationRecord
+        has_one :last_name
+        has_one :last_name, through: :last_name
+      end
 end
